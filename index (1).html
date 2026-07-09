@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>6 Months of Us</title>
+<style>
+  :root{
+    --cream:#FFFCF6;
+    --blush:#FBEAF0;
+    --petal:#F3C7D9;
+    --rose:#E795B3;
+    --deeprose:#C85C85;
+    --plum:#4B1F35;
+    --plum-soft:#7A3E58;
+    --gold:#D9A85C;
+    --lily-cream:#FFFDF4;
+    --lily-yellow:#F0C75E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+    background: var(--blush);
+    color: var(--plum);
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight:400;
+    color: var(--plum);
+  }
+  .section{
+    min-height:100svh;
+    padding: 3rem 1.25rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    text-align:center;
+  }
+  /* ---------- floating lily decorations ---------- */
+  .lily{
+    position:absolute;
+    width:70px;
+    opacity:0.85;
+    pointer-events:none;
+  }
+  /* ---------- HERO / COVER ---------- */
+  #cover{
+    background: linear-gradient(180deg, var(--blush) 0%, var(--petal) 100%);
+  }
+  .cover-frame{
+    border: 2px solid var(--rose);
+    border-radius: 4px;
+    padding: 2.5rem 1.75rem;
+    background: var(--lily-cream);
+    box-shadow: 0 10px 0 -6px var(--rose);
+    max-width: 340px;
+  }
+  .cover-eyebrow{
+    letter-spacing: 3px;
+    font-size: 0.7rem;
+    color: var(--deeprose);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .cover-title{
+    font-size: 2rem;
+    line-height:1.2;
+    margin-bottom: 0.75rem;
+  }
+  .cover-sub{
+    font-size: 0.95rem;
+    color: var(--plum-soft);
+    margin-bottom: 1.5rem;
+  }
+  .tap-btn{
+    background: var(--deeprose);
+    color: var(--lily-cream);
+    border:none;
+    padding: 0.85rem 1.75rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+  }
+  .tap-btn:active{ transform: scale(0.97); }
+  .scroll-hint{
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--plum-soft);
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(8px); }
+  }
+
+  /* ---------- SOUND TOGGLE ---------- */
+  #sound-toggle{
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 50;
+    background: var(--lily-cream);
+    border: 1.5px solid var(--rose);
+    color: var(--deeprose);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-eyebrow{
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--deeprose);
+    margin-bottom: 0.5rem;
+  }
+  .section-title{
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  #timeline{ background: var(--cream); }
+  .timeline-track{
+    width:100%;
+    max-width: 380px;
+    display:flex;
+    flex-direction:column;
+    gap: 1.75rem;
+    position:relative;
+  }
+  .timeline-track::before{
+    content:'';
+    position:absolute;
+    left: 20px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--petal);
+  }
+  .t-item{
+    display:flex;
+    gap: 1rem;
+    text-align:left;
+  }
+  .t-dot{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: var(--lily-cream);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 0.75rem;
+    flex-shrink:0;
+    z-index:1;
+  }
+  .t-card{
+    background: var(--lily-cream);
+    border: 1px solid var(--petal);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    flex:1;
+  }
+  .t-date{
+    font-size: 0.75rem;
+    color: var(--deeprose);
+    margin-bottom: 0.2rem;
+  }
+  .t-label{
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  .reveal-tile{
+    aspect-ratio: 4/3;
+    background: var(--blush);
+    border: 1.5px dashed var(--rose);
+    border-radius: 8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 0.75rem;
+    color: var(--plum-soft);
+    text-align:center;
+    padding: 0.5rem;
+    overflow:hidden;
+    position:relative;
+  }
+  .reveal-tile.revealed{
+    border-style: solid;
+    background: var(--petal);
+  }
+  .reveal-tile img, .reveal-tile video{
+    width:100%; height:100%; object-fit:cover; border-radius:6px;
+    display:none;
+  }
+  .reveal-tile.revealed img, .reveal-tile.revealed video{ display:block; }
+  .reveal-tile.revealed .placeholder-text{ display:none; }
+
+  /* ---------- REASONS ---------- */
+  #reasons{ background: var(--blush); }
+  .lily-btn{
+    width: 130px;
+    height: 130px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+  }
+  .reason-box{
+    background: var(--lily-cream);
+    border: 1px solid var(--petal);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    max-width: 340px;
+    min-height: 90px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 1.05rem;
+    font-family: Georgia, serif;
+    color: var(--plum);
+  }
+  .tap-again{
+    margin-top:1rem;
+    font-size: 0.8rem;
+    color: var(--deeprose);
+  }
+
+  /* ---------- INSIDE JOKES ---------- */
+  #jokes{ background: var(--cream); }
+  .joke-deck{
+    max-width: 340px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap: 1rem;
+  }
+  .joke-card{
+    background: var(--lily-cream);
+    border: 1px solid var(--petal);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    text-align:left;
+    font-size: 0.95rem;
+  }
+  .joke-tag{
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--deeprose);
+    display:block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* ---------- TATTOO Q&A ---------- */
+  #tattoo{ background: var(--blush); }
+  .tattoo-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 360px;
+    width:100%;
+  }
+  .tattoo-card{
+    background: var(--lily-cream);
+    border: 2px solid var(--petal);
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  .tattoo-card.chosen{
+    border-color: var(--gold);
+    background: #FFF8E8;
+  }
+  .tattoo-emoji-slot{
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--blush);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 0.65rem;
+    color: var(--plum-soft);
+  }
+  #tattoo-result{
+    margin-top: 1.5rem;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    color: var(--deeprose);
+    min-height: 1.5rem;
+  }
+
+  /* ---------- CLOSING ---------- */
+  #closing{
+    background: linear-gradient(180deg, var(--cream) 0%, var(--petal) 100%);
+  }
+  .countdown{
+    display:flex;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .cd-box{
+    background: var(--lily-cream);
+    border: 1px solid var(--rose);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    min-width: 56px;
+  }
+  .cd-num{ font-size: 1.3rem; font-family: Georgia, serif; }
+  .cd-label{ font-size: 0.6rem; color: var(--plum-soft); text-transform:uppercase; letter-spacing:1px; }
+  .closing-letter{
+    max-width: 340px;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    line-height:1.7;
+    margin-top: 1.5rem;
+  }
+  .signature{
+    margin-top: 1.25rem;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SOUND TOGGLE ============ -->
+<button id="sound-toggle" aria-label="Toggle music">&#127925;</button>
+<!--
+  TODO (Claude Code phase): replace src below with real royalty-free or your own MP3 files.
+  For per-section music switching, add multiple <audio> tags with data-section="cover|timeline|reasons|jokes|tattoo|closing"
+  and swap src via an IntersectionObserver watching each .section (see script at bottom, hook is already stubbed).
+-->
+<audio id="bg-audio" loop>
+  <source src="audio/theme.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ============ COVER ============ -->
+<section class="section" id="cover">
+  <svg class="lily" style="top:8%; left:6%;" viewBox="0 0 100 100"><path d="M50 90 C40 60 20 55 20 35 C20 20 35 15 50 30 C65 15 80 20 80 35 C80 55 60 60 50 90Z" fill="#FFFDF4" stroke="#E795B3" stroke-width="2"/><circle cx="50" cy="45" r="5" fill="#F0C75E"/></svg>
+  <svg class="lily" style="bottom:6%; right:8%; width:56px;" viewBox="0 0 100 100"><path d="M50 90 C40 60 20 55 20 35 C20 20 35 15 50 30 C65 15 80 20 80 35 C80 55 60 60 50 90Z" fill="#FFFDF4" stroke="#E795B3" stroke-width="2"/><circle cx="50" cy="45" r="5" fill="#F0C75E"/></svg>
+
+  <div class="cover-frame">
+    <p class="cover-eyebrow">a scrapbook, just for you</p>
+    <h1 class="cover-title">6 Months of Us</h1>
+    <!-- TODO: swap in your names -->
+    <p class="cover-sub">[Your Name] &amp; [Her Name]</p>
+    <button class="tap-btn" onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})">Open the book</button>
+  </div>
+  <p class="scroll-hint">scroll to begin ↓</p>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="section" id="timeline">
+  <p class="section-eyebrow">our story so far</p>
+  <h2 class="section-title">The Timeline</h2>
+  <div class="timeline-track">
+    <!-- TODO: replace dates/labels/images with your real milestones. Duplicate .t-item blocks for more entries. -->
+    <div class="t-item">
+      <div class="t-dot">1</div>
+      <div class="t-card">
+        <p class="t-date">Month 1 — 17/01/26</p>
+        <p class="t-label">The day it all started</p>
+        <p class="t-label">I couldnt get a video or picture of this day so i chose this video</p>
+        <div class="reveal-tile" onclick="this.classList.toggle('revealed')">
+          <span class="placeholder-text">tap to reveal photo</span>
+          <video src="videos/dayone.mp4" controls playsinline></video>
+        </div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot">2</div>
+      <div class="t-card">
+        <p class="t-date">Month 2 — [date]</p>
+        <p class="t-label">I think this happened after our first proper disagreement</p>
+        <div class="reveal-tile" onclick="this.classList.toggle('revealed')">
+          <span class="placeholder-text">tap to reveal photo</span>
+          <img src="pics/daytwo.jpeg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot">3</div>
+      <div class="t-card">
+        <p class="t-date">Month 3 — [date]</p>
+        <p class="t-label">[milestone]</p>
+        <div class="reveal-tile" onclick="this.classList.toggle('revealed')">
+          <span class="placeholder-text">tap to reveal video</span>
+          <video src="videos/daythree.mp4" controls></video>
+        </div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot">4</div>
+      <div class="t-card">
+        <p class="t-date">Month 4 — [date]</p>
+        <p class="t-label"></p>
+        <div class="reveal-tile" onclick="this.classList.toggle('revealed')">
+          <span class="placeholder-text">tap to reveal photo</span>
+          <img src="pics/dayfour.jpeg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot">5</div>
+      <div class="t-card">
+        <p class="t-date">Month 5 — [date]</p>
+        <p class="t-label">[milestone]</p>
+        <div class="reveal-tile" onclick="this.classList.toggle('revealed')">
+          <span class="placeholder-text">tap to reveal photo</span>
+          <img src="photos/moment-5.jpg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot">6</div>
+      <div class="t-card">
+        <p class="t-date">Month 6 — today</p>
+        <p class="t-label">Still choosing each other</p>
+        <p class="t-label">We're still to get a picture of this day...I'm glad we keep choosing each other</p>
+        <p class="t-label">So here is a collection of pictures of You that make me smile everytime</p>
+        <div class="reveal-tile" onclick="this.classList.toggle('revealed')">
+          <span class="placeholder-text">tap to reveal photo</span>
+          <img src="photos/moment-6.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REASONS I LOVE YOU ============ -->
+<section class="section" id="reasons">
+  <p class="section-eyebrow">tap the lily</p>
+  <h2 class="section-title">Reasons I Love You</h2>
+
+  <button class="lily-btn" id="reason-lily" onclick="showReason()" aria-label="Reveal a reason">
+    <svg viewBox="0 0 100 100" width="100%" height="100%">
+      <path d="M50 90 C40 60 20 55 20 35 C20 20 35 15 50 30 C65 15 80 20 80 35 C80 55 60 60 50 90Z" fill="#FFFDF4" stroke="#E795B3" stroke-width="2.5"/>
+      <circle cx="50" cy="45" r="7" fill="#F0C75E"/>
+    </svg>
+  </button>
+
+  <div class="reason-box" id="reason-box">tap the lily to see a reason ✿</div>
+  <p class="tap-again">tap again for another one</p>
+</section>
+
+<!-- ============ INSIDE JOKES ============ -->
+<section class="section" id="jokes">
+  <p class="section-eyebrow">only we get these</p>
+  <h2 class="section-title">Inside Jokes</h2>
+
+  <div class="joke-deck">
+    <!-- TODO: replace with your real inside jokes -->
+    <div class="joke-card">
+      <span class="joke-tag">joke #1</span>
+      [Write the inside joke / the line / the moment here]
+    </div>
+    <div class="joke-card">
+      <span class="joke-tag">joke #2</span>
+      [Write another one here]
+    </div>
+    <div class="joke-card">
+      <span class="joke-tag">joke #3</span>
+      [Write another one here]
+    </div>
+  </div>
+</section>
+
+<!-- ============ TATTOO Q&A ============ -->
+<section class="section" id="tattoo">
+  <p class="section-eyebrow">a fun decision</p>
+  <h2 class="section-title">Pick Our Tattoo</h2>
+  <p style="font-size:0.85rem; color:var(--plum-soft); max-width:300px; margin-bottom:1.5rem;">
+    (hypothetically, of course 👀) — which one do we get?
+  </p>
+
+  <div class="tattoo-grid">
+    <!-- TODO: replace emoji-slots with real reference images of each design -->
+    <div class="tattoo-card" data-choice="Matching lilies">
+      <div class="tattoo-emoji-slot">[design 1 image]</div>
+      Matching tiny lilies
+    </div>
+    <div class="tattoo-card" data-choice="Our coordinates">
+      <div class="tattoo-emoji-slot">[design 2 image]</div>
+      Where we met — coordinates
+    </div>
+    <div class="tattoo-card" data-choice="An inside joke symbol">
+      <div class="tattoo-emoji-slot">[design 3 image]</div>
+      Our inside joke, symbolized
+    </div>
+    <div class="tattoo-card" data-choice="6.9 (the date)">
+      <div class="tattoo-emoji-slot">[design 4 image]</div>
+      Our anniversary date
+    </div>
+  </div>
+
+  <p id="tattoo-result"></p>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="section" id="closing">
+  <svg class="lily" style="top:10%; right:6%;" viewBox="0 0 100 100"><path d="M50 90 C40 60 20 55 20 35 C20 20 35 15 50 30 C65 15 80 20 80 35 C80 55 60 60 50 90Z" fill="#FFFDF4" stroke="#E795B3" stroke-width="2"/><circle cx="50" cy="45" r="5" fill="#F0C75E"/></svg>
+
+  <p class="section-eyebrow">counting down to the 17th</p>
+  <h2 class="section-title">Our 6 Month Anniversary</h2>
+
+  <div class="countdown" id="countdown">
+    <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label">days</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">hrs</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">min</div></div>
+  </div>
+
+  <div class="closing-letter">
+    <!-- TODO: write your real closing letter -->
+    <p>[Write your closing message here — what these 6 months have meant to you, why you love her, what you're looking forward to.]</p>
+    <p class="signature">— [Your Name], always</p>
+  </div>
+</section>
+
+<script>
+  // ---------- Reasons I love you ----------
+  const reasons = [
+    // TODO: replace with your real reasons — as many as you want
+    "The way you laugh at your own jokes before you finish telling them.",
+    "You make ordinary days feel like an occasion.",
+    "How you remember tiny things I mention once.",
+    "Your terrible, wonderful singing in the car.",
+    "You believe in me even when I don't."
+  ];
+  function showReason(){
+    const box = document.getElementById('reason-box');
+    const r = reasons[Math.floor(Math.random() * reasons.length)];
+    box.textContent = r;
+    box.style.transform = 'scale(0.97)';
+    setTimeout(()=> box.style.transform = 'scale(1)', 120);
+  }
+
+  // ---------- Tattoo Q&A ----------
+  document.querySelectorAll('.tattoo-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      document.querySelectorAll('.tattoo-card').forEach(c=>c.classList.remove('chosen'));
+      card.classList.add('chosen');
+      document.getElementById('tattoo-result').textContent =
+        `"${card.dataset.choice}" it is 🖋️ — deal?`;
+    });
+  });
+
+  // ---------- Countdown to anniversary ----------
+  // Your anniversary lands on the 17th of every month.
+  // This finds the next 17th automatically — no manual date to update each month.
+  function getNextAnniversary(){
+    const now = new Date();
+    let target = new Date(now.getFullYear(), now.getMonth(), 17, 0, 0, 0);
+    if(now.getDate() >= 17){
+      target = new Date(now.getFullYear(), now.getMonth() + 1, 17, 0, 0, 0);
+    }
+    return target;
+  }
+  function updateCountdown(){
+    const now = new Date();
+    const diff = getNextAnniversary() - now;
+    if(diff <= 0){
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      return;
+    }
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const mins = Math.floor((diff / (1000*60)) % 60);
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = hours;
+    document.getElementById('cd-mins').textContent = mins;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  // ---------- Background music toggle ----------
+  const audio = document.getElementById('bg-audio');
+  const soundBtn = document.getElementById('sound-toggle');
+  let playing = false;
+  soundBtn.addEventListener('click', ()=>{
+    if(playing){
+      audio.pause();
+      soundBtn.innerHTML = '&#127925;';
+    } else {
+      audio.play().catch(()=>{ /* file not added yet during preview */ });
+      soundBtn.innerHTML = '&#128264;';
+    }
+    playing = !playing;
+  });
+
+  // ---------- STUB: per-section music switching ----------
+  // Claude Code phase: add multiple <audio> elements per section and use this
+  // observer to fade between them as she scrolls.
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        // console.log('entered section:', entry.target.id);
+        // hook per-section audio swap here later
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
