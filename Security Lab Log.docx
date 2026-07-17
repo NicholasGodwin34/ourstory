@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)file:///home/nicho/Downloads/lab_notes_template.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Security Lab Log</title>
+<style>
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  :root {
+    --ink: #1a1a1a;
+    --rule: #1a1a1a;
+    --faint: #7a7a7a;
+    --accent: #2f2f2f;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Courier New', Consolas, monospace;
+    color: var(--ink);
+    margin: 0;
+    padding: 0;
+    font-size: 11.5pt;
+    line-height: 1.4;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 4px;
+  }
+
+  /* ---- Header ---- */
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--rule);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+
+  .masthead h1 {
+    font-size: 20pt;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .masthead .sub {
+    font-size: 9pt;
+    color: var(--faint);
+    margin-top: 2px;
+  }
+
+  .masthead .pagenum {
+    font-size: 9pt;
+    color: var(--faint);
+    text-align: right;
+  }
+
+  /* ---- Meta row ---- */
+  .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid var(--rule);
+    margin-bottom: 16px;
+  }
+
+  .meta div {
+    border-right: 1px solid var(--rule);
+    padding: 5px 8px;
+  }
+
+  .meta div:last-child { border-right: none; }
+
+  .meta label {
+    display: block;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--faint);
+    margin-bottom: 10px;
+  }
+
+  /* ---- Section blocks ---- */
+  .section {
+    margin-bottom: 14px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .section-head .tag {
+    font-size: 8pt;
+    color: var(--faint);
+    letter-spacing: 1px;
+  }
+
+  .section-head h2 {
+    font-size: 10.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .section-head .fill-line {
+    flex: 1;
+    border-bottom: 1px solid var(--faint);
+    margin-bottom: 3px;
+  }
+
+  /* Ruled writing area */
+  .ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 21px,
+      #cfcfcf 21px,
+      #cfcfcf 22px
+    );
+  }
+
+  .ruled.h-small { height: 44px; }
+  .ruled.h-med   { height: 66px; }
+  .ruled.h-large { height: 110px; }
+
+  /* Boxed / bordered variant for code-like content */
+  .codebox {
+    border: 1.5px solid var(--rule);
+    padding: 8px 10px;
+    min-height: 70px;
+    font-size: 10pt;
+  }
+
+  .codebox .placeholder {
+    color: var(--faint);
+    font-size: 8.5pt;
+    font-style: italic;
+  }
+
+  /* Two column layout for status + severity checkboxes */
+  .status-row {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    font-size: 9pt;
+    margin-top: 6px;
+  }
+
+  .status-row .group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .box {
+    width: 10px;
+    height: 10px;
+    border: 1.3px solid var(--ink);
+    display: inline-block;
+  }
+
+  .footer-strip {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--faint);
+    padding-top: 5px;
+    margin-top: 10px;
+    font-size: 8pt;
+    color: var(--faint);
+  }
+
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { padding: 0; max-width: none; }
+  }
+
+  @media screen {
+    body { background: #e9e9e9; padding: 20px 0; }
+    .page {
+      background: white;
+      box-shadow: 0 0 0 1px #ccc, 0 4px 16px rgba(0,0,0,0.12);
+      padding: 20px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <div>
+      <h1>Lab Log</h1>
+      <div class="sub">Security exercise / vulnerability worksheet</div>
+    </div>
+    <div class="pagenum">Entry No. ______&nbsp;&nbsp;&nbsp;Page ____ of ____</div>
+  </div>
+
+  <div class="meta">
+    <div><label>Date</label></div>
+    <div><label>Target / App</label></div>
+    <div><label>Category (OWASP)</label></div>
+    <div><label>Difficulty</label></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">01</span>
+      <h2>Objective</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="ruled h-small"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">02</span>
+      <h2>Hypothesis / Approach</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="ruled h-small"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">03</span>
+      <h2>Steps Taken</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="ruled h-large"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">04</span>
+      <h2>Payload / Command Used</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="codebox"><span class="placeholder">e.g. request, query, script, tool flags</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">05</span>
+      <h2>Observed Result</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="ruled h-med"></div>
+    <div class="status-row">
+      <div class="group"><span class="box"></span> Confirmed vulnerable</div>
+      <div class="group"><span class="box"></span> Not exploitable</div>
+      <div class="group"><span class="box"></span> Needs more testing</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">06</span>
+      <h2>Root Cause</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="ruled h-small"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">07</span>
+      <h2>Fix / Remediation</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="ruled h-small"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="tag">08</span>
+      <h2>Notes / Follow-up</h2>
+      <div class="fill-line"></div>
+    </div>
+    <div class="ruled h-small"></div>
+  </div>
+
+  <div class="footer-strip">
+    <span>Personal security lab documentation</span>
+    <span>Signed / reviewed: ____________________</span>
+  </div>
+
+</div>
+
+
+
+</body></html>

@@ -406,6 +406,45 @@
     font-style: italic;
   }
 
+  /* ---------- TAP-TO-OPEN LETTER ---------- */
+  .letter-envelope{
+    cursor: pointer;
+    background: var(--lily-cream);
+    border: 1.5px solid var(--rose);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    max-width: 340px;
+    width: 100%;
+    margin-top: 1.5rem;
+    text-align: center;
+    box-shadow: 0 6px 0 -3px var(--petal);
+    transition: transform 0.2s ease;
+  }
+  .letter-envelope:active{ transform: scale(0.98); }
+  .letter-envelope .envelope-icon{
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .letter-envelope .envelope-hint{
+    font-size: 0.9rem;
+    color: var(--plum-soft);
+    font-family: Georgia, serif;
+  }
+  .letter-content{
+    max-height: 0;
+    overflow: hidden;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    transition: max-height 0.7s ease, margin-top 0.7s ease;
+  }
+  .letter-content.open{
+    margin-top: 1.25rem;
+  }
+
   /* ---------- PASSWORD LOCK SCREEN ---------- */
   html.locked, body.locked{
     overflow: hidden;
@@ -665,7 +704,7 @@
      TODO: replace with your real inside jokes 
     <div class="joke-card">
       <span class="joke-tag">joke #1</span>
-      [Write the inside joke / the line / the moment here]
+      
     </div>
     <div class="joke-card">
       <span class="joke-tag">joke #2</span>
@@ -734,25 +773,63 @@
   </svg>
 
   <p class="section-eyebrow">counting down to the 17th</p>
-  <h2 class="section-title">Our 6 Month Anniversary</h2>
+  <h2 class="section-title">Our 7 Month Anniversary</h2>
 
   <div class="countdown" id="countdown">
     <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label">days</div></div>
     <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">hrs</div></div>
     <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">min</div></div>
   </div>
-
-  <div class="closing-letter">
-    <!-- TODO: write your real closing letter -->
-    <p>Yvonne Opinya....Where do I start? <br>
-      I know there's times when you feel like i'm too much even if you dont say it....I know I can be a lot sometimes. <br>
-    I pray u never stop loving me even when i overwhelm you...I'll always choose you even in days when u piss me off or do some crazy stunt<br> 
-    I'm a jealous person, really jealous, I dont want to make this about me but i have to say this <br>
-  it's not that i dont want you to hang out with your friends. I just feel bad whenever its me or them and u choose them even is its not the time <br> 
-Maybe the way I approach such situations is not okay. I'll try and be understanding but I pray u also try and meet me at the middle <br>
-there a lot i want to say so i'll be updating it every now and then xoxo....lol i donno how to insert emojis over here</p>
-    <p class="signature">— Your loving husband, always</p>
+  <div class="letter-envelope" id="letter-toggle" onclick="toggleLetter('letter-body','letter-hint')">
+    <div class="envelope-icon">💌</div>
+    <p class="envelope-hint" id="letter-hint">6 month aniversary letter</p>
   </div>
+  <div class="letter-content" id="letter-body">
+    <p>
+      Happy six months to us my love. I know today did not turn out the either of us hoped it would. Instead of feeling celebrated, you ended up feeling hurt.<br> 
+      Making you cry broke my heart because the last thing i ever want is for you to feel unseen or unloved because of my actions.
+      I'm sorry that my actions today and this week  made you question how much you mean to me. I also sorry i didnt not wake up in time to get to airport early enoguh for us to have breakfast together. 
+      I need you to know that there has never been a moment where you were not important to me.
+      You are one of the greatest blessings in my life and everyday I thank God that our paths crossed. 
+      Loving you has taught me so much about myself and has shown me part of myself that still need to grow; the parts where I need to communicate better, love better, show up for you better and be more intentional. 
+      I really want to grow with you. I want to know how you recieve love so that I can love you in the ways that matter most to you. 
+      I realized i've been trying to love you in my way; the cloud storage, the spotify premium, but i've lowkey disregarded the things that matter most to you. Love letters, flowers, Nice notes and paragraphs. 
+      I'm really sorry about that my love. 
+      I want to understand you more deeply, and  make sure that when you're hurting, you never feel like you're carrying that pain alone.
+      When i think about my future, I don't picture  random faces or endless possibilities. I picture you my love. I picture us.
+      I picture celebrating  victories together, getting through difficult seasons together, I picture you teaching my mom how to cook lol(i just had to)😂😂, us laughing over silly things, supporting each other's dreams and building a home filled with peace, trust and Love. 
+      I genuinely want to become the kind of man who deserves to you his wife.Not just a man who dreams about that future, but one who puts in the work every single day to earn your trust and make you feel cherished. You are a one of a kind soul and I need to act like it.
+      You are the woman I want beside me. 
+      You are the woman i want to build a life with.
+      You are the woman I want to keep choosing, every single day. You might be stubborn at times but I live for that. Being a last born and all I get you 😂. 
+      If theres ever a time or moment when you dont feel my love, I don't want you to hide them from me. Tell me. Help me understand. I would rather have an uncomfortable conversation than let you silently carry the feeling that you're unloved. 
+      Your feelings matter my love. You matter to me my love. 
+      Thank you for loving me through my imperfections. Thank you for being patient  with me while I'm still learning. Thank you for choosing me these past six months. 
+      I choose you too and I'll forever do.
+      I love you more that my words can fully express, and I hope that from this day forward, I can show you that love more clearly through my actions.
+      Happy six months, my love. 
+      Forever yours 😉😉.
+    </p>
+  </div>
+
+  <div class="letter-envelope" id="letter2-toggle" onclick="toggleLetter('letter2-body','letter2-hint')">
+    <div class="envelope-icon">💌</div>
+    <p class="envelope-hint" id="letter2-hint">tap to read my letter to you</p>
+  </div>
+  <div class="letter-content" id="letter2-body">
+    <div class="closing-letter">
+      <!-- TODO: write your real closing letter -->
+      <p>Yvonne Opinya....Where do I start? <br>
+        I know there's times when you feel like i'm too much even if you dont say it....I know I can be a lot sometimes. <br>
+      I pray u never stop loving me even when i overwhelm you...I'll always choose you even in days when u piss me off or do some crazy stunt<br> 
+      I'm a jealous person, really jealous, I dont want to make this about me but i have to say this <br>
+    it's not that i dont want you to hang out with your friends. I just feel bad whenever its me or them and u choose them even is its not the time <br> 
+  Maybe the way I approach such situations is not okay. I'll try and be understanding but I pray u also try and meet me at the middle <br>
+  there a lot i want to say so i'll be updating it every now and then xoxo....lol i donno how to insert emojis over here</p>
+      <p class="signature">— Your loving husband, always</p>
+    </div>
+  </div>
+
 </section>
 
 </div>
@@ -783,6 +860,22 @@ there a lot i want to say so i'll be updating it every now and then xoxo....lol 
   // Stay unlocked for the rest of this browser session
   if(sessionStorage.getItem('unlocked') === 'true'){
     unlockSite();
+  }
+
+  // ---------- Tap-to-open letter(s) ----------
+  function toggleLetter(bodyId = 'letter-body', hintId = 'letter-hint'){
+    const body = document.getElementById(bodyId);
+    const hint = document.getElementById(hintId);
+    const isOpen = body.classList.contains('open');
+    if(isOpen){
+      body.style.maxHeight = null;
+      body.classList.remove('open');
+      hint.textContent = 'tap to read my letter to you';
+    } else {
+      body.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+      hint.textContent = 'tap to close';
+    }
   }
 
   // ---------- Silly photo stack (month 6) ----------
